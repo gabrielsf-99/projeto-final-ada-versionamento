@@ -54,3 +54,14 @@ def criar_banco():
 
     conn.commit()
     conn.close()
+
+def inserir_pet(nome, idade, peso):
+    conn = sqlite3.connect('pets.db')
+    cursor = conn.cursor()
+
+    cursor.execute('''
+    INSERT INTO pets (nome, idade, peso) VALUES (?, ?, ?)
+    ''', (nome, idade, peso))
+
+    conn.commit()
+    conn.close()
