@@ -35,16 +35,17 @@ def coletar_informacoes_pet():
     print(f"Idade: {idade} anos")
     print(f"Peso: {peso} kg")
 
-# Chama a função para coletar e exibir as informações do pet
-coletar_informacoes_pet()
+    #Inserir dados no banco de dados
+    inserir_pet(nome, idade, peso)
+    print("As informações do pet foram salvas com sucesso no banco de dados.")
 
 def criar_banco():
     conn = sqlite3.connect('pets.db')
-    cursor = conn.cursor
+    cursor = conn.cursor()
 
     #
     cursor.execute('''
-    CREATE TABLE IF NOT EXIST pets(
+    CREATE TABLE IF NOT EXISTS pets(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
         idade INTEGER NOT NULL,
@@ -66,3 +67,27 @@ def inserir_pet(nome, idade, peso):
     conn.commit()
     conn.close()
 
+def exibir_pets():
+    conn = sqlite3.connect('pets.db')
+    cursor = conn.cursor()
+
+    cursor.execute('SELECT * FROM pets')
+    pets = cursor.fetchall()
+
+    if pets:
+        print("\nPets cadastrados:")
+        for pet in pets:
+            print(f"ID: {pet[0]}, Nome: {pet[1]}, Idade: {pet[2]} anos, Peso: {pet[3]} kg")
+    else:
+        print("\nNenhum pet cadastrado.")
+
+    conn.close()
+
+#Criar o Banco de Dados local
+criar_banco()
+
+# Chama a função para coletar e exibir as informações do pet
+coletar_informacoes_pet()
+
+#c#exibir todos os pets cadastrados
+exibir_pets()
