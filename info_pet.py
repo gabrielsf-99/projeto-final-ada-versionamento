@@ -65,3 +65,4 @@ def inserir_pet(nome, idade, peso):
 
     conn.commit()
     conn.close()
+
