@@ -1,3 +1,5 @@
+import sqlite3
+
 # Função para coletar informações sobre o pet
 def coletar_informacoes_pet():
     print("Por favor, insira as informações sobre seu pet.")
@@ -35,3 +37,20 @@ def coletar_informacoes_pet():
 
 # Chama a função para coletar e exibir as informações do pet
 coletar_informacoes_pet()
+
+def criar_banco():
+    conn = sqlite3.connect('pets.db')
+    cursor = conn.cursor
+
+    #
+    cursor.execute('''
+    CREATE TABLE IF NOT EXIST pets(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
+        idade INTEGER NOT NULL,
+        peso REAL NOT NULL
+    )                      
+    ''')
+
+    conn.commit()
+    conn.close()
