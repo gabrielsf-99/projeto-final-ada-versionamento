@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Pets</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Pets Cadastrados</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Peso</th>
+            </tr>
+            {% for pet in pets %}
+            <tr>
+                <td>{{ pet[0] }}</td>
+                <td>{{ pet[1] }}</td>
+                <td>{{ pet[2] }} anos</td>
+                <td>{{ pet[3] }} kg</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <!-- Botão de voltar para a página de cadastro -->
+        <a href="/" class="back-button">Voltar para Cadastro de Pet</a>
+    </div>
+</body>
+</html>
