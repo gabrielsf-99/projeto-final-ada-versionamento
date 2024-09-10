@@ -21,9 +21,11 @@ jobs:
     - name: Deploy na EC2
       run: |
         ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_IP }} << 'EOF'
-        cd /caminho/para/seu/projeto
+        cd /home/ec2-user/seu-projeto
+        sudo yum install git -y
         git pull origin main
+        python3 -m venv venv
         source venv/bin/activate
         pip install -r requirements.txt
-        sudo systemctl restart seu-servico  # reinicia o servidor web, exemplo: gunicorn
+        sudo systemctl restart gunicorn  # Substitua pelo nome correto do serviço
         EOF
