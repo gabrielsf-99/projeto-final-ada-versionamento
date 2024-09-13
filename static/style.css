@@ -40,6 +40,13 @@ button {
     padding: 12px;
 }
 
+table{
+    width: 100%;
+    border-collapse: collapse;
+    align-items: center;
+    text-align: center;
+}
+
 button:hover {
     background-color: #8dc940; /* Um verde um pouco mais escuro para o hover */
 }
